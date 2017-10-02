@@ -33,7 +33,7 @@ function displayThree() {
     var productNumber = Math.floor(Math.random() * products.length);
     // check if in previous 3
     console.log('product number is ' + productNumber);
-    if (productNumber !== previousProducts[0] && productNumber !== previousProducts[1] && productNumber !== previousProducts[2]) {
+    if (productNumber !== previousProducts[0] && productNumber !== previousProducts[1] && productNumber !== previousProducts[2] && productNumber !== currentProducts[0] && productNumber !== currentProducts[1]) {
       currentProducts.push(productNumber);
     }
   }
