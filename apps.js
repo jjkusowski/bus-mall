@@ -40,8 +40,13 @@ function pic1Handler(e) {
   products[currentProducts[1]].clicked++
   // increment counter
   userClicks++
-  // call 3 new random images
-  displayThree();
+  //check if userClicks is less than 25.  if not, display results
+  if (userClicks < 25) {
+    // call 3 new random images
+    displayThree();
+  } else {
+    displayResults();
+  }
 }
 
 function pic2Handler(e) {
@@ -49,8 +54,13 @@ function pic2Handler(e) {
   products[currentProducts[2]].clicked++
   // increment counter
   userClicks++
-  // call 3 new random images
-  displayThree();
+  //check if userClicks is less than 25.  if not, display results
+  if (userClicks < 25) {
+    // call 3 new random images
+    displayThree();
+  } else {
+    displayResults();
+  }
 }
 
 function displayThree() {
