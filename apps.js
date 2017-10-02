@@ -1,10 +1,14 @@
 'use strict';
 var products = [];
 // names of 3 products currently being displayed
-var Store.current = [];
+var currentProducts = [];
 // names of 3 products in last iteration
-var Store.previous = [];
+var previousProducts = [];
 
+// Give access to the 3 picture positions on the DOM
+var pic0 = document.getElementById('pic0');
+var pic1 = document.getElementById('pic1');
+var pic2 = document.getElementById('pic2');
 
 function Store(name, path){
   this.name = name;
@@ -12,6 +16,40 @@ function Store(name, path){
   this.clicked = 0;
   this.displayed = 0;
   products.push(this);
+}
+
+function pic0Handler(e) {
+  // increment pic0 clicked count
+  // increment counter
+  // call 3 new random images
+}
+
+function displayThree() {
+  previousProducts = currentProducts;
+  currentProducts = [];
+  while (currentProducts.length < 3) {
+    // pick a random item
+    var productNumber = Math.floor(Math.random() * products.length);
+    // check if in previous 3
+    if (productNumber = previousProducts[0] || previousProducts[1] || previousProducts[2]) {
+      return
+    } else {
+      currentProducts.push(productNumber);
+    }
+
+  }
+    // pick random image
+    // if in previous 3
+      // restart
+    // else compare to current array
+      // if in current array
+        // restart
+      // else put in current array
+  // Display 3 images
+
+  pic0.src = products[currentProducts[0]].path;
+  pic1.src = products[currentProducts[1]].path;
+  pic2.src = products[currentProducts[2]].path;
 }
 
 new Store('bag', 'img/bag.jpg');
@@ -34,3 +72,9 @@ new Store('unicorn', 'img/unicorn.jpg');
 new Store('usb', 'img/usb.gif');
 new Store('water-can', 'img/water-can.jpg');
 new Store('wine-glass', 'img/wine-glass.jpg');
+
+
+// Click listeners, one per picture position
+pic0.addEventListener('click', pic0Handler);
+// pic1.addEventListener('click', pic1Handler);
+// pic2.addEventListener('click', pic2Handler);
