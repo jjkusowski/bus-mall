@@ -4,6 +4,8 @@ var products = [];
 var currentProducts = [];
 // names of 3 products in last iteration
 var previousProducts = [];
+// counter for number of times user clicks
+var userClicks = 0;
 
 // Give access to the 3 picture positions on the DOM
 var pic0 = document.getElementById('pic0');
@@ -20,8 +22,29 @@ function Store(name, path){
 
 function pic0Handler(e) {
   // increment pic0 clicked count
+  products[currentProducts[0]].clicked++
   // increment counter
+  userClicks++
   // call 3 new random images
+  displayThree();
+}
+
+function pic1Handler(e) {
+  // increment pic0 clicked count
+  products[currentProducts[1]].clicked++
+  // increment counter
+  userClicks++
+  // call 3 new random images
+  displayThree();
+}
+
+function pic2Handler(e) {
+  // increment pic0 clicked count
+  products[currentProducts[2]].clicked++
+  // increment counter
+  userClicks++
+  // call 3 new random images
+  displayThree();
 }
 
 function displayThree() {
@@ -39,19 +62,12 @@ function displayThree() {
   }
   console.log('current products are ' + currentProducts);
 
-
-    // pick random image
-    // if in previous 3
-      // restart
-    // else compare to current array
-      // if in current array
-        // restart
-      // else put in current array
-  // Display 3 images
-
   pic0.src = products[currentProducts[0]].path;
+  products[currentProducts[0]].displayed++
   pic1.src = products[currentProducts[1]].path;
+  products[currentProducts[1]].displayed++
   pic2.src = products[currentProducts[2]].path;
+  products[currentProducts[2]].displayed++
 }
 
 new Store('bag', 'img/bag.jpg');
@@ -79,5 +95,5 @@ displayThree();
 
 // Click listeners, one per picture position
 pic0.addEventListener('click', pic0Handler);
-// pic1.addEventListener('click', pic1Handler);
-// pic2.addEventListener('click', pic2Handler);
+pic1.addEventListener('click', pic1Handler);
+pic2.addEventListener('click', pic2Handler);
