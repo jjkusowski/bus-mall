@@ -27,17 +27,19 @@ function pic0Handler(e) {
 function displayThree() {
   previousProducts = currentProducts;
   currentProducts = [];
+  console.log('previous products were ' + previousProducts);
   while (currentProducts.length < 3) {
     // pick a random item
     var productNumber = Math.floor(Math.random() * products.length);
     // check if in previous 3
-    if (productNumber = previousProducts[0] || previousProducts[1] || previousProducts[2]) {
-      return
-    } else {
+    console.log('product number is ' + productNumber);
+    if (productNumber !== previousProducts[0] && productNumber !== previousProducts[1] && productNumber !== previousProducts[2]) {
       currentProducts.push(productNumber);
     }
-
   }
+  console.log('current products are ' + currentProducts);
+
+
     // pick random image
     // if in previous 3
       // restart
@@ -73,6 +75,7 @@ new Store('usb', 'img/usb.gif');
 new Store('water-can', 'img/water-can.jpg');
 new Store('wine-glass', 'img/wine-glass.jpg');
 
+displayThree();
 
 // Click listeners, one per picture position
 pic0.addEventListener('click', pic0Handler);
