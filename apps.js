@@ -8,6 +8,7 @@ var previousProducts = [];
 var userClicks = 0;
 
 // Give access to the 3 picture positions on the DOM
+var display = document.getElementById('display');
 var pic0 = document.getElementById('pic0');
 var pic1 = document.getElementById('pic1');
 var pic2 = document.getElementById('pic2');
@@ -25,8 +26,13 @@ function pic0Handler(e) {
   products[currentProducts[0]].clicked++
   // increment counter
   userClicks++
-  // call 3 new random images
-  displayThree();
+  //check if userClicks is less than 25.  if not, display results
+  if (userClicks < 25) {
+    // call 3 new random images
+    displayThree();
+  } else {
+    displayResults();
+  }
 }
 
 function pic1Handler(e) {
@@ -68,6 +74,17 @@ function displayThree() {
   products[currentProducts[1]].displayed++
   pic2.src = products[currentProducts[2]].path;
   products[currentProducts[2]].displayed++
+}
+
+function displayResults() {
+  var ulEl = document.createElement('ul');
+  for ( var i = 0; i < products.length; i++) {
+    var liEl = document.createElement('li');
+    liEl.textContent = products[i].name + ': ' + products[i].clicked;
+    ulEl.appendChild(liEl);
+  }
+  display.innerHTML = '';
+  display.appendChild(ulEl);
 }
 
 new Store('bag', 'img/bag.jpg');
