@@ -14,6 +14,7 @@ var userClicks = 0;
 //holders of names and votes
 var names = [];
 var votes = [];
+var displayed = [];
 
 // Give access to the 3 picture positions and the section they are displayed in on the DOM
 var display = document.getElementById('display');
@@ -148,6 +149,7 @@ function updateChartArrays() {
   for (var i = 0; i < products.length; i++) {
     names[i] = products[i].name;
     votes[i] = products[i].clicked;
+    displayed[i] = products[i].displayed;
   }
 }
 
@@ -155,9 +157,15 @@ var data = {
   labels: names,
   datasets: [
     {
+      label: 'Number of Votes',
       data: votes,
-      backgroundColor: '#6D7993',
-      hoverBackgroundColor: '#96858F'
+      backgroundColor: '#6D7993'
+
+    },
+    {
+      label: 'Number of Times Displayed',
+      data: displayed,
+      backgroundColor: '#96858F'
     }]
 };
 
