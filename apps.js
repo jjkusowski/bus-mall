@@ -11,6 +11,10 @@ var previousProducts = [];
 // counter for number of times user clicks
 var userClicks = 0;
 
+//holders of names and votes
+var names = [];
+var votes = [];
+
 // Give access to the 3 picture positions and the section they are displayed in on the DOM
 var display = document.getElementById('display');
 var pic0 = document.getElementById('pic0');
@@ -37,7 +41,8 @@ function pic0Handler(e) {
     displayThree();
   } else {
     // user is done, display results
-    displayResults();
+    updateChartArrays();
+    drawChart();
   }
 }
 
@@ -52,7 +57,8 @@ function pic1Handler(e) {
     displayThree();
   } else {
     // user is done, display results
-    displayResults();
+    updateChartArrays();
+    drawChart();
   }
 }
 
@@ -67,7 +73,9 @@ function pic2Handler(e) {
     displayThree();
   } else {
     // user is done, display results
-    displayResults();
+    updateChartArrays();
+    drawChart();
+    // displayResults();
   }
 }
 
@@ -93,7 +101,7 @@ function displayThree() {
 }
 
 // call this when 25 clicks have been tallied to show results
-function displayResults() {
+function displayList() {
   var ulEl = document.createElement('ul');
   for ( var i = 0; i < products.length; i++) {
     var liEl = document.createElement('li');
@@ -132,3 +140,30 @@ displayThree();
 pic0.addEventListener('click', pic0Handler);
 pic1.addEventListener('click', pic1Handler);
 pic2.addEventListener('click', pic2Handler);
+
+
+// Chart stuff
+
+function updateChartArrays() {
+  for (var i = 0; i < products.length; i++) {
+    names[i] = products[i].name;
+    votes[i] = products[i].clicked;
+  }
+}
+
+var data = {
+  labels: names,
+  datasets: [
+    {
+      data: votes
+    }]
+};
+
+function drawChart() {
+  display.innerHTML = '';
+  var ctx = document.getElementById('click-chart').getContext('2d');
+  clickChart = new Chart(ctx,{
+    type: 'bar',
+    data: data
+  });
+}
