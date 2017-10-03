@@ -1,5 +1,36 @@
+* {
+  border: 1px solid black;
+}
+
 img {
   border: 1px solid green;
-  min-width: 50px;
-  min-height: 50px;
+  vertical-align: middle;
+}
+
+section {
+  text-align: justify;
+  width: 1000px;
+  height: 450px;
+  margin: 0px auto;
+}
+
+div {
+  float: left;
+  border: 1px solid red;
+  /*height: 600px;
+  display: table-cell;
+  vertical-align: middle;*/
+}
+
+#display:before {
+  content: "";
+  display: inline-block;
+  vertical-align: middle;
+  height: 100%;
+}
+
+#display:after {
+  content: "";
+  display: inline-block;
+  width: 100%;
 }

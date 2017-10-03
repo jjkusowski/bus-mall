@@ -1,13 +1,17 @@
 'use strict';
+// storage for all products from constructor
 var products = [];
+
 // names of 3 products currently being displayed
 var currentProducts = [];
+
 // names of 3 products in last iteration
 var previousProducts = [];
+
 // counter for number of times user clicks
 var userClicks = 0;
 
-// Give access to the 3 picture positions on the DOM
+// Give access to the 3 picture positions and the section they are displayed in on the DOM
 var display = document.getElementById('display');
 var pic0 = document.getElementById('pic0');
 var pic1 = document.getElementById('pic1');
@@ -21,16 +25,18 @@ function Store(name, path){
   products.push(this);
 }
 
+// handlers for when each pic is clicked
 function pic0Handler(e) {
   // increment pic0 clicked count
   products[currentProducts[0]].clicked++
   // increment counter
   userClicks++
-  //check if userClicks is less than 25.  if not, display results
+  //check if userClicks is less than 25.
   if (userClicks < 25) {
-    // call 3 new random images
+    // if < 25, call 3 new random images
     displayThree();
   } else {
+    // user is done, display results
     displayResults();
   }
 }
@@ -40,11 +46,12 @@ function pic1Handler(e) {
   products[currentProducts[1]].clicked++
   // increment counter
   userClicks++
-  //check if userClicks is less than 25.  if not, display results
+  //check if userClicks is less than 25.
   if (userClicks < 25) {
-    // call 3 new random images
+    // if < 25, call 3 new random images
     displayThree();
   } else {
+    // user is done, display results
     displayResults();
   }
 }
@@ -54,29 +61,28 @@ function pic2Handler(e) {
   products[currentProducts[2]].clicked++
   // increment counter
   userClicks++
-  //check if userClicks is less than 25.  if not, display results
+  // check if userClicks is less than 25.
   if (userClicks < 25) {
-    // call 3 new random images
+    // if < 25, call 3 new random images
     displayThree();
   } else {
+    // user is done, display results
     displayResults();
   }
 }
 
+// display 3 random images that do not match each other and are not the same as the previous 3
 function displayThree() {
   previousProducts = currentProducts;
   currentProducts = [];
-  console.log('previous products were ' + previousProducts);
   while (currentProducts.length < 3) {
     // pick a random item
     var productNumber = Math.floor(Math.random() * products.length);
-    // check if in previous 3
-    console.log('product number is ' + productNumber);
+    // check if in previous 3 or current selection
     if (productNumber !== previousProducts[0] && productNumber !== previousProducts[1] && productNumber !== previousProducts[2] && productNumber !== currentProducts[0] && productNumber !== currentProducts[1]) {
       currentProducts.push(productNumber);
     }
   }
-  console.log('current products are ' + currentProducts);
 
   pic0.src = products[currentProducts[0]].path;
   products[currentProducts[0]].displayed++
@@ -86,11 +92,12 @@ function displayThree() {
   products[currentProducts[2]].displayed++
 }
 
+// call this when 25 clicks have been tallied to show results
 function displayResults() {
   var ulEl = document.createElement('ul');
   for ( var i = 0; i < products.length; i++) {
     var liEl = document.createElement('li');
-    liEl.textContent = products[i].name + ': ' + products[i].clicked;
+    liEl.textContent = products[i].clicked + ' votes for the ' +  products[i].name + '.';
     ulEl.appendChild(liEl);
   }
   display.innerHTML = '';
@@ -118,6 +125,7 @@ new Store('usb', 'img/usb.gif');
 new Store('water-can', 'img/water-can.jpg');
 new Store('wine-glass', 'img/wine-glass.jpg');
 
+// calls display 3 on page load
 displayThree();
 
 // Click listeners, one per picture position
