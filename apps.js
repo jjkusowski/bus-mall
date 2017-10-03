@@ -21,6 +21,8 @@ var display = document.getElementById('display');
 var pic0 = document.getElementById('pic0');
 var pic1 = document.getElementById('pic1');
 var pic2 = document.getElementById('pic2');
+var header = document.getElementById('header');
+
 
 function Store(name, path){
   this.name = name;
@@ -42,6 +44,7 @@ function pic0Handler(e) {
     displayThree();
   } else {
     // user is done, display results
+    changeHeader();
     updateChartArrays();
     drawChart();
   }
@@ -58,6 +61,7 @@ function pic1Handler(e) {
     displayThree();
   } else {
     // user is done, display results
+    changeHeader();
     updateChartArrays();
     drawChart();
   }
@@ -74,6 +78,7 @@ function pic2Handler(e) {
     displayThree();
   } else {
     // user is done, display results
+    changeHeader();
     updateChartArrays();
     drawChart();
     // displayResults();
@@ -111,6 +116,15 @@ function displayList() {
   }
   display.innerHTML = '';
   display.appendChild(ulEl);
+}
+
+//Changes the header when the chart is displayed
+function changeHeader() {
+  var h1El = document.createElement('h1');
+  h1El.textContent = 'See your results below!';
+  header.innerHTML = '';
+  header.appendChild(h1El);
+
 }
 
 new Store('bag', 'img/bag.jpg');
@@ -179,7 +193,7 @@ function drawChart() {
       scales: {
         yAxes: [{
           ticks: {
-            max: 25,
+            max: 13,
             min: 0,
             stepSize: 1.0
           }
