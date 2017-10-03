@@ -11,11 +11,18 @@ var previousProducts = [];
 // counter for number of times user clicks
 var userClicks = 0;
 
+//holders of names and votes
+var names = [];
+var votes = [];
+var displayed = [];
+
 // Give access to the 3 picture positions and the section they are displayed in on the DOM
 var display = document.getElementById('display');
 var pic0 = document.getElementById('pic0');
 var pic1 = document.getElementById('pic1');
 var pic2 = document.getElementById('pic2');
+var header = document.getElementById('header');
+
 
 function Store(name, path){
   this.name = name;
@@ -37,7 +44,9 @@ function pic0Handler(e) {
     displayThree();
   } else {
     // user is done, display results
-    displayResults();
+    changeHeader();
+    updateChartArrays();
+    drawChart();
   }
 }
 
@@ -52,7 +61,9 @@ function pic1Handler(e) {
     displayThree();
   } else {
     // user is done, display results
-    displayResults();
+    changeHeader();
+    updateChartArrays();
+    drawChart();
   }
 }
 
@@ -67,7 +78,10 @@ function pic2Handler(e) {
     displayThree();
   } else {
     // user is done, display results
-    displayResults();
+    changeHeader();
+    updateChartArrays();
+    drawChart();
+    // displayResults();
   }
 }
 
@@ -93,7 +107,7 @@ function displayThree() {
 }
 
 // call this when 25 clicks have been tallied to show results
-function displayResults() {
+function displayList() {
   var ulEl = document.createElement('ul');
   for ( var i = 0; i < products.length; i++) {
     var liEl = document.createElement('li');
@@ -102,6 +116,15 @@ function displayResults() {
   }
   display.innerHTML = '';
   display.appendChild(ulEl);
+}
+
+//Changes the header when the chart is displayed
+function changeHeader() {
+  var h1El = document.createElement('h1');
+  h1El.textContent = 'See your results below!';
+  header.innerHTML = '';
+  header.appendChild(h1El);
+
 }
 
 new Store('bag', 'img/bag.jpg');
@@ -132,3 +155,50 @@ displayThree();
 pic0.addEventListener('click', pic0Handler);
 pic1.addEventListener('click', pic1Handler);
 pic2.addEventListener('click', pic2Handler);
+
+
+// Chart stuff
+
+function updateChartArrays() {
+  for (var i = 0; i < products.length; i++) {
+    names[i] = products[i].name;
+    votes[i] = products[i].clicked;
+    displayed[i] = products[i].displayed;
+  }
+}
+
+var data = {
+  labels: names,
+  datasets: [
+    {
+      label: 'Number of Votes',
+      data: votes,
+      backgroundColor: '#6D7993'
+
+    },
+    {
+      label: 'Number of Times Displayed',
+      data: displayed,
+      backgroundColor: '#96858F'
+    }]
+};
+
+function drawChart() {
+  display.innerHTML = '';
+  var ctx = document.getElementById('click-chart').getContext('2d');
+  var clickChart = new Chart(ctx,{
+    type: 'bar',
+    data: data,
+    options: {
+      scales: {
+        yAxes: [{
+          ticks: {
+            max: 13,
+            min: 0,
+            stepSize: 1.0
+          }
+        }]
+      }
+    }
+  });
+}
