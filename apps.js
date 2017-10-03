@@ -155,15 +155,28 @@ var data = {
   labels: names,
   datasets: [
     {
-      data: votes
+      data: votes,
+      backgroundColor: '#6D7993',
+      hoverBackgroundColor: '#96858F'
     }]
 };
 
 function drawChart() {
   display.innerHTML = '';
   var ctx = document.getElementById('click-chart').getContext('2d');
-  clickChart = new Chart(ctx,{
+  var clickChart = new Chart(ctx,{
     type: 'bar',
-    data: data
+    data: data,
+    options: {
+      scales: {
+        yAxes: [{
+          ticks: {
+            max: 25,
+            min: 0,
+            stepSize: 1.0
+          }
+        }]
+      }
+    }
   });
 }
