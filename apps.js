@@ -117,7 +117,7 @@ function changeHeader() {
 }
 
 // If statement to check for local storage.  If yes, load it.  If not, create new stores.
-if (localStorage) {
+if (localStorage.length > 0) {
   products = JSON.parse(localStorage.getItem('storedProduct'));
 } else {
   new Store('bag', 'img/bag.jpg');
