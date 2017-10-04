@@ -43,6 +43,7 @@ function pic0Handler() {
     displayThree();
   } else {
     // user is done, display results
+    localStorage.setItem('storedProduct', JSON.stringify(products));
     changeHeader();
     updateChartArrays();
     drawChart();
@@ -60,6 +61,7 @@ function pic1Handler() {
     displayThree();
   } else {
     // user is done, display results
+    localStorage.setItem('storedProduct', JSON.stringify(products));
     changeHeader();
     updateChartArrays();
     drawChart();
@@ -77,6 +79,7 @@ function pic2Handler() {
     displayThree();
   } else {
     // user is done, display results
+    localStorage.setItem('storedProduct', JSON.stringify(products));
     changeHeader();
     updateChartArrays();
     drawChart();
@@ -113,27 +116,31 @@ function changeHeader() {
   header.appendChild(h1El);
 }
 
-new Store('bag', 'img/bag.jpg');
-new Store('banana', 'img/banana.jpg');
-new Store('bathroom', 'img/bathroom.jpg');
-new Store('boots', 'img/boots.jpg');
-new Store('breakfast', 'img/breakfast.jpg');
-new Store('bubblegum', 'img/bubblegum.jpg');
-new Store('chair', 'img/chair.jpg');
-new Store('cthulhu', 'img/cthulhu.jpg');
-new Store('dog-duck', 'img/dog-duck.jpg');
-new Store('dragon', 'img/dragon.jpg');
-new Store('pen', 'img/pen.jpg');
-new Store('pet-sweep', 'img/pet-sweep.jpg');
-new Store('scissors', 'img/scissors.jpg');
-new Store('shark', 'img/shark.jpg');
-new Store('sweep', 'img/sweep.png');
-new Store('tauntaun', 'img/tauntaun.jpg');
-new Store('unicorn', 'img/unicorn.jpg');
-new Store('usb', 'img/usb.gif');
-new Store('water-can', 'img/water-can.jpg');
-new Store('wine-glass', 'img/wine-glass.jpg');
-
+// If statement to check for local storage.  If yes, load it.  If not, create new stores.
+if (localStorage.length > 0) {
+  products = JSON.parse(localStorage.getItem('storedProduct'));
+} else {
+  new Store('bag', 'img/bag.jpg');
+  new Store('banana', 'img/banana.jpg');
+  new Store('bathroom', 'img/bathroom.jpg');
+  new Store('boots', 'img/boots.jpg');
+  new Store('breakfast', 'img/breakfast.jpg');
+  new Store('bubblegum', 'img/bubblegum.jpg');
+  new Store('chair', 'img/chair.jpg');
+  new Store('cthulhu', 'img/cthulhu.jpg');
+  new Store('dog-duck', 'img/dog-duck.jpg');
+  new Store('dragon', 'img/dragon.jpg');
+  new Store('pen', 'img/pen.jpg');
+  new Store('pet-sweep', 'img/pet-sweep.jpg');
+  new Store('scissors', 'img/scissors.jpg');
+  new Store('shark', 'img/shark.jpg');
+  new Store('sweep', 'img/sweep.png');
+  new Store('tauntaun', 'img/tauntaun.jpg');
+  new Store('unicorn', 'img/unicorn.jpg');
+  new Store('usb', 'img/usb.gif');
+  new Store('water-can', 'img/water-can.jpg');
+  new Store('wine-glass', 'img/wine-glass.jpg');
+}
 // calls display 3 on page load
 displayThree();
 
@@ -178,7 +185,6 @@ function drawChart() {
       scales: {
         yAxes: [{
           ticks: {
-            max: 13,
             min: 0,
             stepSize: 1.0
           }
