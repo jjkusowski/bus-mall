@@ -35,9 +35,9 @@ function Store(name, path){
 // handlers for when each pic is clicked
 function pic0Handler(e) {
   // increment pic0 clicked count
-  products[currentProducts[0]].clicked++
+  products[currentProducts[0]].clicked++;
   // increment counter
-  userClicks++
+  userClicks++;
   //check if userClicks is less than 25.
   if (userClicks < 25) {
     // if < 25, call 3 new random images
@@ -52,9 +52,9 @@ function pic0Handler(e) {
 
 function pic1Handler(e) {
   // increment pic0 clicked count
-  products[currentProducts[1]].clicked++
+  products[currentProducts[1]].clicked++;
   // increment counter
-  userClicks++
+  userClicks++;
   //check if userClicks is less than 25.
   if (userClicks < 25) {
     // if < 25, call 3 new random images
@@ -69,9 +69,9 @@ function pic1Handler(e) {
 
 function pic2Handler(e) {
   // increment pic0 clicked count
-  products[currentProducts[2]].clicked++
+  products[currentProducts[2]].clicked++;
   // increment counter
-  userClicks++
+  userClicks++;
   // check if userClicks is less than 25.
   if (userClicks < 25) {
     // if < 25, call 3 new random images
@@ -99,11 +99,11 @@ function displayThree() {
   }
 
   pic0.src = products[currentProducts[0]].path;
-  products[currentProducts[0]].displayed++
+  products[currentProducts[0]].displayed++;
   pic1.src = products[currentProducts[1]].path;
-  products[currentProducts[1]].displayed++
+  products[currentProducts[1]].displayed++;
   pic2.src = products[currentProducts[2]].path;
-  products[currentProducts[2]].displayed++
+  products[currentProducts[2]].displayed++;
 }
 
 // call this when 25 clicks have been tallied to show results
@@ -111,7 +111,7 @@ function displayList() {
   var ulEl = document.createElement('ul');
   for ( var i = 0; i < products.length; i++) {
     var liEl = document.createElement('li');
-    liEl.textContent = products[i].clicked + ' votes for the ' +  products[i].name + '.';
+    liEl.textContent = products[i].clicked + ' votes for the ' + products[i].name + '.';
     ulEl.appendChild(liEl);
   }
   display.innerHTML = '';
