@@ -43,6 +43,7 @@ function pic0Handler() {
     displayThree();
   } else {
     // user is done, display results
+    localStorage.setItem('storedProduct', JSON.stringify(products));
     changeHeader();
     updateChartArrays();
     drawChart();
@@ -60,6 +61,7 @@ function pic1Handler() {
     displayThree();
   } else {
     // user is done, display results
+    localStorage.setItem('storedProduct', JSON.stringify(products));
     changeHeader();
     updateChartArrays();
     drawChart();
@@ -77,6 +79,7 @@ function pic2Handler() {
     displayThree();
   } else {
     // user is done, display results
+    localStorage.setItem('storedProduct', JSON.stringify(products));
     changeHeader();
     updateChartArrays();
     drawChart();
