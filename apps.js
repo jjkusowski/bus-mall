@@ -23,7 +23,6 @@ var pic1 = document.getElementById('pic1');
 var pic2 = document.getElementById('pic2');
 var header = document.getElementById('header');
 
-
 function Store(name, path){
   this.name = name;
   this.path = path;
@@ -33,7 +32,7 @@ function Store(name, path){
 }
 
 // handlers for when each pic is clicked
-function pic0Handler(e) {
+function pic0Handler() {
   // increment pic0 clicked count
   products[currentProducts[0]].clicked++;
   // increment counter
@@ -50,7 +49,7 @@ function pic0Handler(e) {
   }
 }
 
-function pic1Handler(e) {
+function pic1Handler() {
   // increment pic0 clicked count
   products[currentProducts[1]].clicked++;
   // increment counter
@@ -67,7 +66,7 @@ function pic1Handler(e) {
   }
 }
 
-function pic2Handler(e) {
+function pic2Handler() {
   // increment pic0 clicked count
   products[currentProducts[2]].clicked++;
   // increment counter
@@ -106,25 +105,12 @@ function displayThree() {
   products[currentProducts[2]].displayed++;
 }
 
-// call this when 25 clicks have been tallied to show results
-function displayList() {
-  var ulEl = document.createElement('ul');
-  for ( var i = 0; i < products.length; i++) {
-    var liEl = document.createElement('li');
-    liEl.textContent = products[i].clicked + ' votes for the ' + products[i].name + '.';
-    ulEl.appendChild(liEl);
-  }
-  display.innerHTML = '';
-  display.appendChild(ulEl);
-}
-
 //Changes the header when the chart is displayed
 function changeHeader() {
   var h1El = document.createElement('h1');
   h1El.textContent = 'See your results below!';
   header.innerHTML = '';
   header.appendChild(h1El);
-
 }
 
 new Store('bag', 'img/bag.jpg');
@@ -174,7 +160,6 @@ var data = {
       label: 'Number of Votes',
       data: votes,
       backgroundColor: '#6D7993'
-
     },
     {
       label: 'Number of Times Displayed',
@@ -186,7 +171,7 @@ var data = {
 function drawChart() {
   display.innerHTML = '';
   var ctx = document.getElementById('click-chart').getContext('2d');
-  var clickChart = new Chart(ctx,{
+  new Chart(ctx,{
     type: 'bar',
     data: data,
     options: {
